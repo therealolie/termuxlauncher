@@ -43,7 +43,7 @@ clean:
 	rm -rf ${BIN_DIR}
 
 install:
-	printf "%s\n%s\n%s\n" \
+	printf "%s\n%s\n" \
 		"/system/bin/cp ${BUILD_APK_PATH}/${APK} /data/local/tmp/install.apk" \
 		"/system/bin/pm install -g /data/local/tmp/install.apk" \
 		| rish

@@ -1,4 +1,5 @@
 package amsitlab.android.apps.termuxlauncher;
+// vim:fdn=2
 
 
 import android.os.Bundle;
@@ -206,14 +207,13 @@ public class MainActivity extends Activity
 				String pkgName = pkg.packageName;
 				String originalAppName = pkg.loadLabel(pm).toString();
 				String appName = originalAppName.toLowerCase();
-				appName = appName.split(":")[0];
 				Intent intent = pm.getLaunchIntentForPackage(pkgName);
 				boolean isSystemApp = ((pkg.flags & ApplicationInfo.FLAG_SYSTEM) == 1) ? true : false;
 				Log.d(LOG_TAG,"[" + intent + "] : [" + pkgName + "] : [" + isSystemApp + "] : [" + "] : [" + appName + "]");
 				if(intent == null)
 					continue;
 				String componentName = intent.getComponent().flattenToShortString();
-				String toRemove = "'\"()&{}$!<>#+*";
+				String toRemove = ":'\"()&{}$!<>#+*";
 				for(int i=0;i<toRemove.length();i++)
 					appName = appName.replace(""+toRemove.charAt(i),"");
 				toRemove = " \n\t";
@@ -226,8 +226,8 @@ public class MainActivity extends Activity
 				appNameList.append("\\n");
 				printer.print(aliassedName
 						+ ")\n"
-						+ "\t\tname=\"" + originalAppName.replace("\"","\\\"") + "\"\n"
-						+ "\t\tpkg=\"" + componentName + "\"\n"
+						+ "\t\tname=\'" + originalAppName + "\'\n"
+						+ "\t\tpkg=\'" + componentName + "\'\n"
 						+ "\t\t;;\n"
 					     );
 
